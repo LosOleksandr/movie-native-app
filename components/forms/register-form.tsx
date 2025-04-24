@@ -1,14 +1,13 @@
 import { Link, router } from 'expo-router'
 import { useState } from 'react'
-import { Text, View } from 'react-native'
-import { AnimatedView } from 'react-native-reanimated/lib/typescript/component/View'
+import { Text } from 'react-native'
 import { z } from 'zod'
 
 import { authAPI } from '@/api/auth'
 import { useAppForm } from '@/hooks/use-app-form'
 
-import ThemedText from '../shared/themed-text'
 import FadeInContainer from '../shared/fade-in-container'
+import ThemedText from '../shared/themed-text'
 
 const registerSchema = z
     .object({
