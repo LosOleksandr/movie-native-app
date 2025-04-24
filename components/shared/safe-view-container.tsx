@@ -1,6 +1,6 @@
-import clsx from 'clsx'
+import { cx } from 'class-variance-authority'
 import React from 'react'
-import { View, ViewProps } from 'react-native'
+import { View, type ViewProps } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 type Props = {
@@ -12,7 +12,7 @@ const SafeViewContainer = ({ children, className, ...props }: Props) => {
 
     return (
         <View
-            className={clsx('flex-1', className)}
+            className={cx('flex-1 bg-primary-foreground', className)}
             style={{
                 paddingTop: insets.top,
                 paddingLeft: insets.left,
