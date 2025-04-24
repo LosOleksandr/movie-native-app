@@ -20,6 +20,8 @@ const textVariants = cva('text', {
             primary: 'text-primary-foreground',
             secondary: 'text-secondary-foreground',
             accent: 'text-dark',
+            success: 'text-light',
+            danger: 'text-light',
         },
 
         size: {

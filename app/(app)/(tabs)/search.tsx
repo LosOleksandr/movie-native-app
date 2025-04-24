@@ -1,10 +1,12 @@
-import { Text, View } from 'react-native'
+import { Text } from 'react-native'
+
+import SafeViewContainer from '@/components/shared/safe-view-container'
 
 const Page = () => {
     return (
-        <View>
+        <SafeViewContainer>
             <Text>index</Text>
-        </View>
+        </SafeViewContainer>
     )
 }
 

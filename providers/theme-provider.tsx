@@ -1,7 +1,8 @@
-import { themes } from '@/utils/colors'
 import { useColorScheme } from 'nativewind'
 import React, { createContext } from 'react'
 import { View } from 'react-native'
+
+import { themes } from '@/utils/colors'
 
 interface ThemeProviderProps {
     children: React.ReactNode

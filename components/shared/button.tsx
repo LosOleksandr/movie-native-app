@@ -10,7 +10,7 @@ import Animated, {
 } from 'react-native-reanimated'
 
 import { cn } from '@/utils/cn'
-import { reanimatedColors } from '@/utils/colors'
+import { activeColors } from '@/utils/colors'
 
 import ThemedText, { type ThemedTextVariants } from './themed-text'
 
@@ -20,6 +20,8 @@ const buttonVariants = cva(['border rounded-lg max-w-max justify-center items-ce
             primary: 'border-transparent',
             secondary: 'border-border',
             accent: 'border-accent-foreground',
+            success: 'border-transparent',
+            danger: 'border-transparent',
         },
         size: {
             badge: 'py-1 px-2',
@@ -68,7 +70,7 @@ const Button = ({
 }: ButtonProps) => {
     const { colorScheme } = useColorScheme()
     const pressed = useSharedValue(0)
-    const colors = reanimatedColors[colorScheme!][intent!]
+    const colors = activeColors[colorScheme!][intent!]
 
     const animatedStyle = useAnimatedStyle(() => {
         const backgroundColor = interpolateColor(pressed.value, [0, 1], [colors.from, colors.to])

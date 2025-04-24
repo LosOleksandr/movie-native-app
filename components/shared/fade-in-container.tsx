@@ -7,7 +7,7 @@ type FadeInContainerProps = AnimatedProps<ViewProps>
 
 const FadeInContainer = ({ children, className, ...props }: FadeInContainerProps) => {
     return (
-        <Animated.View entering={FadeInDown} className={cn('flex-1', className)} {...props}>
+        <Animated.View entering={FadeInDown.duration(500).delay(200)} className={cn('flex-1', className)} {...props}>
             {children}
         </Animated.View>
     )

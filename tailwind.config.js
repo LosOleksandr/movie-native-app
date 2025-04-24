@@ -7,23 +7,40 @@ module.exports = {
         extend: {
             colors: {
                 primary: {
-                    DEFAULT: 'hsl(var(--color-primary-default))',
-                    foreground: 'hsl(var(--color-primary-foreground))',
+                    DEFAULT: 'var(--color-primary-default)',
+                    foreground: 'var(--color-primary-foreground)',
+                    active: 'var(--color-primary-active)',
+                    foreground_active: 'var(--color-primary-foreground-active)',
                 },
                 secondary: {
-                    DEFAULT: 'hsl(var(--color-secondary-default))',
-                    foreground: 'hsl(var(--color-secondary-foreground))',
+                    DEFAULT: 'var(--color-secondary-default)',
+                    foreground: 'var(--color-secondary-foreground)',
+                    active: 'var(--color-secondary-foreground)',
+                    foreground_active: 'var(--color-secondary-active)',
                 },
                 accent: {
-                    DEFAULT: 'hsl(var(--color-accent-default))',
-                    foreground: 'hsl(var(--color-accent-foreground))',
+                    DEFAULT: 'var(--color-accent-default)',
+                    foreground: 'var(--color-accent-default)',
+                    active: 'var(--color-accent-active)',
+                    foreground_active: 'var(--color-accent-foreground-active)',
                 },
-                border: 'hsl(var(--color-border))',
-                danger: 'hsl(var(--color-danger))',
-                success: 'hsl(var(--color-success))',
-                muted: 'hsl(var(--color-muted))',
-                light: 'hsl(var(--color-light))',
-                dark: 'hsl(var(--color-dark))',
+                danger: {
+                    DEFAULT: 'var(--color-danger-default)',
+                    active: 'var(--color-danger-active)',
+                },
+                success: {
+                    DEFAULT: 'var(--color-success-default)',
+                    active: 'var(--color-success-active)',
+                },
+                dark: {
+                    DEFAULT: 'var(--color-dark-default)',
+                    active: 'var(--color-dark-active)',
+                },
+                light: {
+                    DEFAULT: 'var(--color-light-default)',
+                    active: 'var(--color-light-active)',
+                },
+                muted: 'var(--color-muted-default)',
             },
         },
     },
