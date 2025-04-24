@@ -30,9 +30,7 @@ const FormField = ({ placeholder = '', label, className, validatorApapter = 'def
                 placeholder={placeholder}
                 className={cn(
                     'rounded-2xl border-2 p-4 text-primary',
-                    isErrorShown
-                        ? 'border-danger focus:border-danger'
-                        : 'border-secondary-foreground focus:border-primary',
+                    isErrorShown ? 'border-danger focus:border-danger' : 'border-secondary focus:border-primary',
                 )}
                 {...rest}
             />
