@@ -4,7 +4,7 @@ import React from 'react'
 
 const Tabs = () => {
     return (
-        <ExpoTabs>
+        <ExpoTabs screenOptions={{ headerShown: false }}>
             <ExpoTabs.Screen
                 name="index"
                 options={{
