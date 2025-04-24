@@ -1,7 +1,5 @@
 import { Link, router } from 'expo-router'
 import { useState } from 'react'
-import { Text, View } from 'react-native'
-import Animated, { FadeIn, FadeInDown, FadeOutDown } from 'react-native-reanimated'
 import { z } from 'zod'
 
 import { authAPI } from '@/api/auth'
