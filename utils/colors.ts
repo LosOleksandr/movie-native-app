@@ -15,10 +15,10 @@ export const colors = {
         foreground_active: twColors.zinc[300],
     },
     accent: {
-        default: twColors.yellow[500],
-        foreground: twColors.yellow[200],
-        active: twColors.yellow[400],
-        foreground_active: twColors.yellow[300],
+        default: twColors.amber[400],
+        foreground: twColors.amber[400],
+        active: twColors.amber[600],
+        foreground_active: twColors.amber[300],
     },
     success: {
         default: twColors.green[500],
@@ -28,7 +28,10 @@ export const colors = {
         default: twColors.red[500],
         active: twColors.red[400],
     },
-    muted: twColors.neutral[400],
+    muted: {
+        default: twColors.neutral[400],
+        foreground: twColors.neutral[200],
+    },
 }
 
 export const themes = {
@@ -53,7 +56,8 @@ export const themes = {
         '--color-dark-active': colors.primary.active,
         '--color-light-default': colors.primary.foreground,
         '--color-light-active': colors.primary.foreground_active,
-        '--color-muted-default': colors.muted,
+        '--color-muted-default': colors.muted.default,
+        '--color-muted-foreground': colors.muted.foreground,
     }),
 
     dark: vars({
@@ -77,7 +81,8 @@ export const themes = {
         '--color-dark-active': colors.primary.active,
         '--color-light-default': colors.primary.foreground,
         '--color-light-active': colors.primary.foreground_active,
-        '--color-muted': colors.muted,
+        '--color-muted-default': colors.muted.foreground,
+        '--color-muted-foreground': colors.muted.default,
     }),
 }
 
