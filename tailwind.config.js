@@ -40,7 +40,10 @@ module.exports = {
                     DEFAULT: 'var(--color-light-default)',
                     active: 'var(--color-light-active)',
                 },
-                muted: 'var(--color-muted-default)',
+                muted: {
+                    DEFAULT: 'var(--color-muted-default)',
+                    active: 'var(--color-muted-active)',
+                },
             },
         },
     },

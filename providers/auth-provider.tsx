@@ -10,13 +10,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         onInitialize()
     }, [onInitialize])
 
-    if (isLoading) {
-        return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <ActivityIndicator size="large" />
-            </View>
-        )
-    }
+    // if (isLoading) {
+    //     return (
+    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    //             <ActivityIndicator size="large" />
+    //         </View>
+    //     )
+    // }
 
     return <>{children}</>
 }
