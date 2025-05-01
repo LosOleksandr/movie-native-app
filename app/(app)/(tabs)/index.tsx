@@ -1,13 +1,14 @@
-import { Link } from 'expo-router'
+import { ScrollView } from 'react-native'
 
 import SafeViewContainer from '@/components/shared/safe-view-container'
-import ThemedText from '@/components/shared/themed-text'
+import TopicsList from '@/components/topics-list'
 
 const Page = () => {
     return (
-        <SafeViewContainer className="justify-center">
-            <ThemedText className="text-light">Home</ThemedText>
-            <Link href="/(app)/(tabs)/search">Search</Link>
+        <SafeViewContainer>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="gap-8 p-5">
+                <TopicsList />
+            </ScrollView>
         </SafeViewContainer>
     )
 }

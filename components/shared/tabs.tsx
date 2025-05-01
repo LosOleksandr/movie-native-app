@@ -38,7 +38,7 @@ const AppTabs = () => {
     return (
         <Tabs>
             <TabSlot />
-            <TabList className="absolute bottom-0 w-full items-center justify-center bg-slate-300 px-12 py-3 dark:bg-slate-800">
+            <TabList className="w-full items-center justify-center bg-slate-300 px-12 py-3 dark:bg-slate-800">
                 <TabTrigger name="home" href="/" asChild>
                     <AppTabButton icon="home">Home</AppTabButton>
                 </TabTrigger>
