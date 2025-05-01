@@ -1,8 +1,8 @@
-import { User } from '@/types/user'
+import type { User } from '@/types/user'
 
 import fetchApi from '..'
-import buildUrls from '../utils/buildUrls'
 import UserEndpoints from './user.endpoints'
+import buildUrls from '../utils/buildUrls'
 
 const userUrls = buildUrls<typeof UserEndpoints>(UserEndpoints)
 

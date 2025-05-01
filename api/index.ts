@@ -1,7 +1,7 @@
 import * as SecureStore from 'expo-secure-store'
 import { Platform } from 'react-native'
 
-import { Api, ApiError, ApiResponse } from '@/types/api'
+import type { Api, ApiError, ApiResponse } from '@/types/api'
 
 const API_URL = Platform.OS === 'android' ? process.env.EXPO_PUBLIC_API_URL_ANDROID : process.env.EXPO_PUBLIC_API_URL
 

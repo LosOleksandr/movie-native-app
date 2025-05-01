@@ -3,8 +3,8 @@ import * as SecureStore from 'expo-secure-store'
 import type { User, UserCredentials } from '@/types/user'
 
 import fetchApi from '..'
-import buildUrls from '../utils/buildUrls'
 import AuthEndpoints from './auth-enpoints'
+import buildUrls from '../utils/buildUrls'
 
 const authUrls = buildUrls<typeof AuthEndpoints>(AuthEndpoints)
 
