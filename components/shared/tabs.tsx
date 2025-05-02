@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons'
 import { TabList, Tabs, TabSlot, TabTrigger, type TabTriggerSlotProps } from 'expo-router/ui'
 import { forwardRef } from 'react'
 import { Pressable, View } from 'react-native'
-import Animated, { Easing, FadeInDown, LinearTransition } from 'react-native-reanimated'
+import Animated, { Easing, FadeIn, LinearTransition } from 'react-native-reanimated'
 
 import { colors } from '@/utils/colors'
 
@@ -15,13 +15,12 @@ type AppTabButtonProps = TabTriggerSlotProps & {
 const AppTabButton = forwardRef<View, AppTabButtonProps>(({ icon, isFocused, children, ...props }, ref) => {
     return (
         <Animated.View
-            entering={FadeInDown.delay(150)}
+            entering={FadeIn.duration(300)}
             layout={LinearTransition.easing(Easing.ease)}
-            className="max-w-max items-center justify-center overflow-hidden rounded-3xl bg-slate-600/50"
+            className="flex-row items-center justify-center gap-2 overflow-hidden rounded-3xl bg-slate-600/50"
         >
             <Pressable ref={ref} {...props} className="items-center justify-center gap-2 px-4 py-2">
                 <Ionicons name={icon} size={24} color={isFocused ? colors.accent.default : colors.primary.foreground} />
-
                 {isFocused && (
                     <ThemedText intent={'accent'} font={'bold'}>
                         {children}

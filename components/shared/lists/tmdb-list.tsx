@@ -1,5 +1,5 @@
 import { useSuspenseQuery, type QueryFunction } from '@tanstack/react-query'
-import { FlatList, type FlatListProps } from 'react-native'
+import { FlatList, View, type FlatListProps } from 'react-native'
 
 import type { TMDBListItem as TMDBListItemType, TMDBListResponse } from '@/types/tmdb'
 
@@ -22,11 +22,13 @@ const TMDBList = ({ queryFn, queryKey, ...props }: TMDBListProps) => {
             data={data.results}
             horizontal
             scrollEnabled
-            contentContainerClassName="gap-4"
             keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => <TMDBListItem item={item} />}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
+            ItemSeparatorComponent={() => <View style={{ width: 16 }} />} // Gap between items
+            ListHeaderComponent={<View style={{ width: 16 }} />} // Padding at start
+            ListFooterComponent={<View style={{ width: 16 }} />}
         />
     )
 }
