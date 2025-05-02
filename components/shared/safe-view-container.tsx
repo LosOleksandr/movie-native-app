@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, type ViewProps } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { cn } from '@/utils/cn'
 
@@ -9,22 +9,10 @@ type Props = {
 } & ViewProps
 
 const SafeViewContainer = ({ children, className, ...props }: Props) => {
-    const insets = useSafeAreaInsets()
-
     return (
-        <View
-            className={cn('flex-1 bg-primary-foreground', className)}
-            style={{
-                flex: 1,
-                paddingTop: insets.top,
-                paddingLeft: insets.left,
-                paddingBottom: insets.bottom,
-                paddingRight: insets.right,
-            }}
-            {...props}
-        >
+        <SafeAreaView className={cn('flex-1 bg-primary-foreground', className)} {...props}>
             {children}
-        </View>
+        </SafeAreaView>
     )
 }
 

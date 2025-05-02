@@ -1,26 +1,48 @@
-import { View } from 'react-native'
+import { FlatList } from 'react-native'
 
 import { tmdbAPI } from '@/api/tmdb'
 
 import TMDBList from './shared/lists/tmdb-list'
 import { TMDBTopic } from './shared/tmdb-topic'
 
+const topics = [
+    {
+        key: 'trending-movies',
+        title: 'Trending',
+        queryFn: () => tmdbAPI.movies.discoverTrendingMovies(),
+    },
+    {
+        key: 'upcoming-movies',
+        title: 'Upcoming movies this month',
+        queryFn: tmdbAPI.movies.discoverUpcomingMovies,
+    },
+    {
+        key: 'playing-now-movies',
+        title: 'Playing now',
+        queryFn: tmdbAPI.movies.discoverPlayingNowMovies,
+    },
+    {
+        key: 'top-rated-movies',
+        title: 'Top rated',
+        queryFn: tmdbAPI.movies.discoverTopRatedMovies,
+    },
+]
+
 const TopicsList = () => {
     return (
-        <View className="gap-8">
-            <TMDBTopic topic_title="Trending">
-                <TMDBList queryKey={['trending-movies']} queryFn={() => tmdbAPI.movies.discoverTrendingMovies()} />
-            </TMDBTopic>
-            <TMDBTopic topic_title="Upcoming movies this month">
-                <TMDBList queryKey={['upcoming-movies']} queryFn={tmdbAPI.movies.discoverUpcomingMovies} />
-            </TMDBTopic>
-            <TMDBTopic topic_title="Playing now">
-                <TMDBList queryKey={['playing-now-movies']} queryFn={tmdbAPI.movies.discoverPlayingNowMovies} />
-            </TMDBTopic>
-            <TMDBTopic topic_title="Top rated">
-                <TMDBList queryKey={['top-rated-movies']} queryFn={tmdbAPI.movies.discoverTopRatedMovies} />
-            </TMDBTopic>
-        </View>
+        <FlatList
+            data={topics}
+            contentContainerClassName="pb-8 gap-12"
+            numColumns={1}
+            keyExtractor={(item) => item.key}
+            renderItem={({ item }) => (
+                <TMDBTopic topic_title={item.title}>
+                    <TMDBList queryKey={[item.key]} queryFn={item.queryFn} />
+                </TMDBTopic>
+            )}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+        />
     )
 }
 
