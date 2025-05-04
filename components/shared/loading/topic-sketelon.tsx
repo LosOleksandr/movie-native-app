@@ -25,7 +25,7 @@ const TopicSkeleton = () => {
             keyExtractor={(item) => item}
             horizontal
             renderItem={() => <TopicSkeletonItem />}
-            contentContainerClassName="gap-4"
+            contentContainerClassName="gap-4 ml-4"
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
         />
