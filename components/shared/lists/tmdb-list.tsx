@@ -26,9 +26,9 @@ const TMDBList = ({ queryFn, queryKey, ...props }: TMDBListProps) => {
             renderItem={({ item }) => <TMDBListItem item={item} />}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
-            ListHeaderComponent={<View style={{ width: 16 }} />}
-            ListFooterComponent={<View style={{ width: 16 }} />}
+            ItemSeparatorComponent={() => <View className="w-4" />}
+            ListHeaderComponent={<View className="w-4" />}
+            ListFooterComponent={<View className="w-4" />}
         />
     )
 }

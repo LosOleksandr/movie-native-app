@@ -53,7 +53,7 @@ const discoverUpcomingMovies = async (): Promise<TMDBListResponse> => {
     const params: DiscoverMoviesParams = {
         'release_date.gte': release_date_gte,
         'release_date.lte': release_date_lte,
-        with_release_type: 2 | 3,
+        with_release_type: '2|3',
     }
 
     return discoverMovies(params)
@@ -61,12 +61,12 @@ const discoverUpcomingMovies = async (): Promise<TMDBListResponse> => {
 
 const discoverPlayingNowMovies = async (): Promise<TMDBListResponse> => {
     const release_date_gte = getFormattedDate(dayjs().subtract(2, 'month').endOf('month'))
-    const release_date_lte = getFormattedDate(dayjs())
+    const release_date_lte = getFormattedDate(dayjs().add(2, 'day'))
 
     const params: DiscoverMoviesParams = {
         'release_date.gte': release_date_gte,
         'release_date.lte': release_date_lte,
-        with_release_type: 2 | 3,
+        with_release_type: '2|3',
     }
 
     return discoverMovies(params)

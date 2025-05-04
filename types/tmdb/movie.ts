@@ -77,7 +77,7 @@ type DiscoverMoviesParams = {
     with_keywords?: string
     with_origin_country?: string
     with_original_language?: string
-    with_release_type?: number
+    with_release_type?: string
     with_people?: string
     'with_runtime.gte'?: number
     'with_runtime.lte'?: number
