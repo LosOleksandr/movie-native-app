@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, type ViewProps } from 'react-native'
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
+import { type ViewProps } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { cn } from '@/utils/cn'
 

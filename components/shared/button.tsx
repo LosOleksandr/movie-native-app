@@ -14,7 +14,7 @@ import { activeColors } from '@/utils/colors'
 
 import ThemedText, { type ThemedTextVariants } from './themed-text'
 
-const buttonVariants = cva(['border rounded-lg max-w-max justify-center items-center'], {
+const buttonVariants = cva(['border rounded-lg max-w-full justify-center items-center'], {
     variants: {
         intent: {
             primary: 'border-transparent',
@@ -28,6 +28,7 @@ const buttonVariants = cva(['border rounded-lg max-w-max justify-center items-ce
             small: 'py-2 px-4',
             medium: 'py-3 px-8',
             large: 'py-3 px-12',
+            xl: 'py-3 px-16',
         },
         disabled: {
             true: 'opacity-50',

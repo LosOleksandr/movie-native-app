@@ -1,9 +1,7 @@
-import { Link, router } from 'expo-router'
-import { useState } from 'react'
-import { Text } from 'react-native'
+import { Link } from 'expo-router'
 import { z } from 'zod'
 
-import { authAPI } from '@/api/auth'
+import { useAuthActions } from '@/hooks/auth/use-auth-actions'
 import { useAppForm } from '@/hooks/use-app-form'
 
 import FadeInContainer from '../shared/fade-in-container'
@@ -39,7 +37,9 @@ const registerSchema = z
     })
 
 const RegisterForm = () => {
-    const [submitError, setSubmitError] = useState('')
+    const { registerAction } = useAuthActions()
+
+    const { mutateAsync: register, error, isError } = registerAction
 
     const form = useAppForm({
         defaultValues: {
@@ -49,17 +49,7 @@ const RegisterForm = () => {
         },
 
         onSubmit: async ({ value }) => {
-            try {
-                await authAPI.register(value)
-
-                router.push('/(app)/(tabs)')
-            } catch (error) {
-                if (error instanceof Error) {
-                    setSubmitError(error.message)
-                } else {
-                    setSubmitError('Unexpected error')
-                }
-            }
+            await register(value)
         },
 
         validators: {
@@ -86,7 +76,11 @@ const RegisterForm = () => {
                     <field.FormField label="Confirm password" validatorApapter="zod" secureTextEntry />
                 )}
             />
-            {submitError && <Text className="my-4 text-center text-red-500">{submitError}</Text>}
+            {isError && (
+                <ThemedText align={'center'} size={'base'} intent={'danger'}>
+                    {error.message}
+                </ThemedText>
+            )}
             <form.AppForm>
                 <form.SubscribeButton text="Signup" />
             </form.AppForm>

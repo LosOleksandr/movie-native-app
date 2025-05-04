@@ -26,8 +26,8 @@ const TMDBList = ({ queryFn, queryKey, ...props }: TMDBListProps) => {
             renderItem={({ item }) => <TMDBListItem item={item} />}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={() => <View style={{ width: 16 }} />} // Gap between items
-            ListHeaderComponent={<View style={{ width: 16 }} />} // Padding at start
+            ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
+            ListHeaderComponent={<View style={{ width: 16 }} />}
             ListFooterComponent={<View style={{ width: 16 }} />}
         />
     )

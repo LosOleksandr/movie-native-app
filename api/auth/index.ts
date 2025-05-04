@@ -1,15 +1,14 @@
-import * as SecureStore from 'expo-secure-store'
-
-import type { User, UserCredentials } from '@/types/user'
+import type { UserCredentials } from '@/types/user'
+import { deleteTokenAsync, setTokenAsync } from '@/utils/store-token'
 
 import fetchApi from '..'
-import AuthEndpoints from './auth-enpoints'
 import buildUrls from '../utils/buildUrls'
+import AuthEndpoints from './auth-enpoints'
 
 const authUrls = buildUrls<typeof AuthEndpoints>(AuthEndpoints)
 
 const register = async (credentials: UserCredentials): Promise<void> => {
-    const response = await fetchApi<{ user: User; token: string }>({
+    const response = await fetchApi<{ token: string }>({
         url_endpoint: authUrls.Register,
         method: 'POST',
         body: credentials,
@@ -21,7 +20,7 @@ const register = async (credentials: UserCredentials): Promise<void> => {
 
     const { data } = response
 
-    await SecureStore.setItemAsync('token', data.token)
+    await setTokenAsync(data.token)
 }
 
 const login = async (credentials: UserCredentials): Promise<void> => {
@@ -37,7 +36,7 @@ const login = async (credentials: UserCredentials): Promise<void> => {
 
     const { data } = response
 
-    await SecureStore.setItemAsync('token', data.token)
+    await setTokenAsync(data.token)
 }
 
 const logout = async (): Promise<void> => {
@@ -52,7 +51,7 @@ const logout = async (): Promise<void> => {
         throw new Error(response.message || 'Logout failed')
     }
 
-    await SecureStore.deleteItemAsync('token')
+    await deleteTokenAsync()
 }
 
 export const authAPI = {

@@ -1,7 +1,7 @@
-import * as SecureStore from 'expo-secure-store'
 import { Platform } from 'react-native'
 
 import type { Api, ApiError, ApiResponse } from '@/types/api'
+import { deleteTokenAsync, getTokenAsync, setTokenAsync } from '@/utils/store-token'
 
 const API_URL = Platform.OS === 'android' ? process.env.EXPO_PUBLIC_API_URL_ANDROID : process.env.EXPO_PUBLIC_API_URL
 
@@ -20,7 +20,7 @@ const fetchApi = async <T>(input: Api, isRetry = false): Promise<ApiResponse<T> 
     }
 
     if (authRequired) {
-        const token = await SecureStore.getItemAsync('token')
+        const token = await getTokenAsync()
         if (token) {
             requestHeaders = {
                 ...requestHeaders,
@@ -58,6 +58,7 @@ const fetchApi = async <T>(input: Api, isRetry = false): Promise<ApiResponse<T> 
             const refreshData = await refreshRes.json()
 
             if (!refreshRes.ok) {
+                await deleteTokenAsync()
                 return {
                     status: refreshRes.status,
                     ok: false,
@@ -68,7 +69,7 @@ const fetchApi = async <T>(input: Api, isRetry = false): Promise<ApiResponse<T> 
 
             const token = refreshData?.token
             if (token) {
-                await SecureStore.setItemAsync('token', token)
+                await setTokenAsync(token)
 
                 return fetchApi<T>(input, true)
             }

@@ -1,24 +1,15 @@
-import { router } from 'expo-router'
-import { Button, Text, View } from 'react-native'
-
-import useAuthStore from '@/stores/auth'
+import LogoutButton from '@/components/logout'
+import ProtectedState from '@/components/shared/protected-state'
+import SafeViewContainer from '@/components/shared/safe-view-container'
+import { useAuthContext } from '@/providers/auth-provider'
 
 const Profile = () => {
-    const { isAuthenticated } = useAuthStore()
-
-    if (!isAuthenticated) {
-        return (
-            <View className="flex-1 items-center justify-center">
-                <Text>Please login to continue</Text>
-                <Button title="Login" onPress={() => router.push('/login')} />
-            </View>
-        )
-    }
+    const { isAuthenticated } = useAuthContext()
 
     return (
-        <View>
-            <Text>Profile</Text>
-        </View>
+        <SafeViewContainer className="items-center justify-center">
+            {isAuthenticated ? <LogoutButton /> : <ProtectedState />}
+        </SafeViewContainer>
     )
 }
 

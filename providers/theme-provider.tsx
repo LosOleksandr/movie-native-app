@@ -17,7 +17,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
     return (
         <ThemeContext.Provider value={{ theme: colorScheme }}>
-            <View style={themes[colorScheme]} className="flex-1">
+            <View style={themes[colorScheme]} className="flex-1 bg-primary-foreground">
                 {children}
             </View>
         </ThemeContext.Provider>

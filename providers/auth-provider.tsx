@@ -1,22 +1,28 @@
-import React, { useEffect } from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { createContext, useContext, type ReactNode } from 'react'
 
-import useAuthStore from '@/stores/auth'
+import { useCurrentUser } from '@/hooks/auth/use-current-user'
+import type { User } from '@/types/user'
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const { onInitialize, isLoading } = useAuthStore()
+import type { UseQueryResult } from '@tanstack/react-query'
 
-    useEffect(() => {
-        onInitialize()
-    }, [onInitialize])
+type AuthContextType = {
+    user: User | null
+    isAuthenticated: boolean
+    userQuery: UseQueryResult<User, Error>
+}
 
-    // if (isLoading) {
-    //     return (
-    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //             <ActivityIndicator size="large" />
-    //         </View>
-    //     )
-    // }
+const AuthContext = createContext<AuthContextType | null>(null)
 
-    return <>{children}</>
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+    const auth = useCurrentUser()
+
+    return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
+}
+
+export const useAuthContext = () => {
+    const context = useContext(AuthContext)
+    if (!context) {
+        throw new Error('useAuthContext must be used within an AuthProvider')
+    }
+    return context
 }
