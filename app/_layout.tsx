@@ -11,12 +11,12 @@ const queryClient = new QueryClient()
 export default function RootLayout() {
     return (
         <ThemeProvider>
-            <AuthProvider>
-                <QueryClientProvider client={queryClient}>
+            <QueryClientProvider client={queryClient}>
+                <AuthProvider>
                     <Slot />
                     <StatusBar style="auto" />
-                </QueryClientProvider>
-            </AuthProvider>
+                </AuthProvider>
+            </QueryClientProvider>
         </ThemeProvider>
     )
 }

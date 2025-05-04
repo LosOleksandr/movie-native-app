@@ -1,17 +1,17 @@
 import { Redirect, Stack } from 'expo-router'
 import React from 'react'
 
-import useAuthStore from '@/stores/auth'
+import { useAuthContext } from '@/providers/auth-provider'
 
 const Layout = () => {
-    const { isAuthenticated } = useAuthStore()
+    const { isAuthenticated } = useAuthContext()
 
     if (isAuthenticated) {
         return <Redirect href={'/(app)/(tabs)'} />
     }
 
     return (
-        <Stack screenOptions={{ headerShown: false }}>
+        <Stack screenOptions={{ headerShown: false, animation: 'none' }}>
             <Stack.Screen name="index" />
             <Stack.Screen name="login" />
         </Stack>

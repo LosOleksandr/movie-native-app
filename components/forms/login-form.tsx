@@ -1,8 +1,7 @@
-import { Link, router } from 'expo-router'
-import { useState } from 'react'
+import { Link } from 'expo-router'
 import { z } from 'zod'
 
-import { authAPI } from '@/api/auth'
+import { useAuthActions } from '@/hooks/auth/use-auth-actions'
 import { useAppForm } from '@/hooks/use-app-form'
 
 import FadeInContainer from '../shared/fade-in-container'
@@ -17,7 +16,9 @@ const loginSchema = z.object({
 })
 
 const LoginForm = () => {
-    const [submitError, setSubmitError] = useState('')
+    const { loginAction } = useAuthActions()
+
+    const { mutateAsync: login, error, isError } = loginAction
 
     const form = useAppForm({
         defaultValues: {
@@ -28,17 +29,7 @@ const LoginForm = () => {
             onChange: loginSchema,
         },
         onSubmit: async ({ value }) => {
-            try {
-                await authAPI.login(value)
-
-                router.push('/(app)/(tabs)')
-            } catch (error) {
-                if (error instanceof Error) {
-                    setSubmitError(error.message)
-                } else {
-                    setSubmitError('Unexpected error')
-                }
-            }
+            await login(value)
         },
     })
 
@@ -55,9 +46,9 @@ const LoginForm = () => {
                 name="password"
                 children={(field) => <field.FormField label="Password" validatorApapter="zod" secureTextEntry />}
             />
-            {submitError && (
+            {isError && (
                 <ThemedText align={'center'} size={'base'} intent={'danger'}>
-                    {submitError}
+                    {error.message}
                 </ThemedText>
             )}
             <form.AppForm>
