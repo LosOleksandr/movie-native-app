@@ -10,7 +10,8 @@ type TMDBListItem = {
     popularity: number
     poster_path: string | null
     release_date: string
-    title: string
+    title?: string
+    name?: string
     video: boolean
     vote_average: number
     vote_count: number

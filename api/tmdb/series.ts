@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 import type {
     DetailsParams,
     DiscoverSeriesParams,
@@ -6,6 +8,7 @@ import type {
     TMDBListResponse,
     TrendingTimeWindow,
 } from '@/types/tmdb'
+import { getFormattedDate } from '@/utils/date'
 
 import fetchApi from '..'
 import { tmdbUrls } from './tmdb.urls'
@@ -43,6 +46,29 @@ const discoverTrendingSeries = async (
     return response.data
 }
 
+const discoverOnAirSeries = async (): Promise<TMDBListResponse> => {
+    const air_date_gte = getFormattedDate(dayjs().subtract(2, 'month').endOf('month'))
+    const air_date_lte = getFormattedDate(dayjs().add(2, 'day'))
+
+    const params: DiscoverSeriesParams = {
+        'air_date.gte': air_date_gte,
+        'air_date.lte': air_date_lte,
+        without_genres: '10767,10763,10764,16',
+    }
+
+    return discoverSeries(params)
+}
+
+const discoverTopRatedSeries = async (): Promise<TMDBListResponse> => {
+    const params: DiscoverSeriesParams = {
+        sort_by: 'vote_average.desc',
+        'vote_count.gte': 200,
+        without_genres: '10767,10763,10764,16',
+    }
+
+    return discoverSeries(params)
+}
+
 const getSeriesDetails = async (id: string, params: DetailsParams = {}): Promise<SeriesDetails> => {
     const response = await fetchApi<SeriesDetails>({
         url_endpoint: `${tmdbUrls.Series}/${id}`,
@@ -60,5 +86,7 @@ const getSeriesDetails = async (id: string, params: DetailsParams = {}): Promise
 export const series = {
     discoverSeries,
     discoverTrendingSeries,
+    discoverOnAirSeries,
+    discoverTopRatedSeries,
     getSeriesDetails,
 }

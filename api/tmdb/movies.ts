@@ -76,7 +76,29 @@ const discoverTopRatedMovies = async (): Promise<TMDBListResponse> => {
     const params: DiscoverMoviesParams = {
         sort_by: 'vote_average.desc',
         'vote_count.gte': 200,
-        without_genres: '99,10755',
+        without_genres: '99,10755,16',
+    }
+
+    return discoverMovies(params)
+}
+
+const discoverAnimationMovies = async (): Promise<TMDBListResponse> => {
+    const params: DiscoverMoviesParams = {
+        sort_by: 'vote_average.desc',
+        'vote_count.gte': 200,
+        with_genres: '16',
+        with_original_language: 'en',
+    }
+
+    return discoverMovies(params)
+}
+
+const discoverAnimeMovies = async (): Promise<TMDBListResponse> => {
+    const params: DiscoverMoviesParams = {
+        sort_by: 'vote_average.desc',
+        'vote_count.gte': 200,
+        with_genres: '16',
+        with_original_language: 'ja',
     }
 
     return discoverMovies(params)
@@ -102,5 +124,7 @@ export const movies = {
     discoverUpcomingMovies,
     discoverPlayingNowMovies,
     discoverTopRatedMovies,
+    discoverAnimationMovies,
+    discoverAnimeMovies,
     getMovieDetails,
 }

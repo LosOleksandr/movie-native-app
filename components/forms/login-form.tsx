@@ -52,7 +52,7 @@ const LoginForm = () => {
                 </ThemedText>
             )}
             <form.AppForm>
-                <form.SubscribeButton text="Login" />
+                <form.SubscribeButton text="Login" size={'xl'} />
             </form.AppForm>
             <Link href={'/(auth)'} className="text-md mt-4 max-w-max self-center text-secondary underline">
                 Do not have an account? Create one
