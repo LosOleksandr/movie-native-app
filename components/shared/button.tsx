@@ -83,20 +83,21 @@ const Button = ({
     })
 
     return (
-        <Pressable
-            disabled={disabled}
-            accessibilityRole="button"
-            onPress={onPress}
-            onPressIn={() => (pressed.value = withTiming(1, { duration: 150 }))}
-            onPressOut={() => (pressed.value = withTiming(0, { duration: 150 }))}
-            {...props}
-        >
-            <Animated.View style={animatedStyle} className={cn(buttonVariants({ size, intent, disabled }), className)}>
-                <ThemedText intentForeground={intent} size={font_size} font={font} className={className}>
+        <Animated.View style={animatedStyle} className={cn(buttonVariants({ size, intent, disabled }), className)}>
+            <Pressable
+                disabled={disabled}
+                accessibilityRole="button"
+                onPress={onPress}
+                onPressIn={() => (pressed.value = withTiming(1, { duration: 150 }))}
+                onPressOut={() => (pressed.value = withTiming(0, { duration: 150 }))}
+                className="w-full items-center justify-center"
+                {...props}
+            >
+                <ThemedText intentForeground={intent} size={font_size} font={font}>
                     {text}
                 </ThemedText>
-            </Animated.View>
-        </Pressable>
+            </Pressable>
+        </Animated.View>
     )
 }
 

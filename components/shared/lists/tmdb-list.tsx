@@ -1,19 +1,22 @@
-import { useSuspenseQuery, type QueryFunction } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { FlatList, View, type FlatListProps } from 'react-native'
 
-import type { TMDBListItem as TMDBListItemType, TMDBListResponse } from '@/types/tmdb'
+import type { TMDBListQuery } from '@/types/query'
+import type { TMDBListItem as TMDBListItemType } from '@/types/tmdb'
 
 import TMDBListItem from '../list-items/tmdb-list-item'
 
 type TMDBListProps = {
-    queryKey: string[]
-    queryFn: QueryFunction<TMDBListResponse, string[], never>
+    query: TMDBListQuery
 } & Omit<FlatListProps<TMDBListItemType>, 'data' | 'renderItem' | 'keyExtractor'>
 
-const TMDBList = ({ queryFn, queryKey, ...props }: TMDBListProps) => {
+const TMDBList = ({ query, ...props }: TMDBListProps) => {
+    const { queryKey, queryFn, queryOptions } = query
+
     const { data } = useSuspenseQuery({
         queryKey,
         queryFn,
+        ...queryOptions,
     })
 
     return (

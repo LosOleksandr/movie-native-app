@@ -1,35 +1,36 @@
-import React, { useEffect } from 'react'
-import { FlatList } from 'react-native'
-import Animated, { useAnimatedStyle, useSharedValue, withRepeat, withTiming } from 'react-native-reanimated'
+import React from 'react'
+import { FlatList, type FlatListProps } from 'react-native'
+import Animated from 'react-native-reanimated'
 
-const TopicSkeletonItem = () => {
-    const opacity = useSharedValue(0)
+import { useLoadingAnimation } from '@/hooks/use-loading-animation'
+import { cn } from '@/utils/cn'
 
-    useEffect(() => {
-        opacity.value = withRepeat(withTiming(1, { duration: 1000 }), -1, true)
-    }, [opacity])
-
-    const animatedStyle = useAnimatedStyle(() => ({
-        opacity: opacity.value,
-    }))
-
-    return <Animated.View style={animatedStyle} className="h-80 w-48 rounded-xl bg-slate-400/50" />
+type TopicSkeletonItemProps = {
+    className?: string
 }
 
-const TopicSkeleton = () => {
-    const data = Array.from({ length: 20 }, (_, i) => i.toString())
+type TopicSkeletonListProps = {
+    numItems: number
+} & Pick<FlatListProps<string>, 'contentContainerClassName' | 'columnWrapperClassName' | 'renderItem'>
+
+export const TopicSkeletonItem = ({ className }: TopicSkeletonItemProps) => {
+    const loadingAnimation = useLoadingAnimation()
+
+    return <Animated.View style={loadingAnimation} className={cn('bg-slate-400/50', className)} />
+}
+
+export const TopicSkeletonList = ({ numItems, renderItem, ...props }: TopicSkeletonListProps) => {
+    const data = Array.from({ length: numItems }, (_, i) => i.toString())
 
     return (
         <FlatList
             data={data}
             keyExtractor={(item) => item}
             horizontal
-            renderItem={() => <TopicSkeletonItem />}
-            contentContainerClassName="gap-4 ml-4"
+            renderItem={renderItem}
             showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
+            {...props}
         />
     )
 }
-
-export default TopicSkeleton

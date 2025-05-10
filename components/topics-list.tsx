@@ -1,48 +1,97 @@
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 
 import { tmdbAPI } from '@/api/tmdb'
+import type { TMDBListQuery } from '@/types/query'
+import { QUERIES_KEYS } from '@/utils/queries-keys'
 
 import TMDBList from './shared/lists/tmdb-list'
 import { TMDBTopic } from './shared/tmdb-topic'
 
-const topics = [
+type TopicItemType = {
+    id: string
+    query: TMDBListQuery
+    title: string
+}
+
+const { MOVIES, SERIES } = QUERIES_KEYS.TOPICS
+
+const topics: TopicItemType[] = [
     {
-        key: 'trending-movies',
-        title: 'Trending',
-        queryFn: () => tmdbAPI.movies.discoverTrendingMovies(),
-    },
-    {
-        key: 'upcoming-movies',
+        id: 'upcoming-movies',
+        query: {
+            queryKey: MOVIES.UPCOMING_MOVIES,
+            queryFn: tmdbAPI.movies.discoverUpcomingMovies,
+        },
         title: 'Upcoming movies this month',
-        queryFn: tmdbAPI.movies.discoverUpcomingMovies,
     },
     {
-        key: 'playing-now-movies',
+        id: 'playing-now-movies',
+        query: {
+            queryKey: MOVIES.PLAYING_NOW_MOVIES,
+            queryFn: tmdbAPI.movies.discoverPlayingNowMovies,
+        },
         title: 'Playing now',
-        queryFn: tmdbAPI.movies.discoverPlayingNowMovies,
     },
     {
-        key: 'top-rated-movies',
+        id: 'top-rated-movies',
+        query: {
+            queryKey: MOVIES.TOP_RATED_MOVIES,
+            queryFn: tmdbAPI.movies.discoverTopRatedMovies,
+        },
         title: 'Top rated',
-        queryFn: tmdbAPI.movies.discoverTopRatedMovies,
+    },
+    {
+        id: 'animation-movies',
+        query: {
+            queryKey: MOVIES.ANIMATION_MOVIES,
+            queryFn: tmdbAPI.movies.discoverAnimationMovies,
+        },
+        title: 'Top animation movies',
+    },
+    {
+        id: 'anime-movies',
+        query: {
+            queryKey: MOVIES.ANIME_MOVIES,
+            queryFn: tmdbAPI.movies.discoverAnimeMovies,
+        },
+        title: 'Top anime movies',
+    },
+    {
+        id: 'on-air-series',
+        query: {
+            queryKey: SERIES.ON_AIR_SERIES,
+            queryFn: tmdbAPI.series.discoverOnAirSeries,
+        },
+        title: 'Series on air',
+    },
+    {
+        id: 'top-reated-series',
+        query: {
+            queryKey: SERIES.TOP_RATED_SERIES,
+            queryFn: tmdbAPI.series.discoverTopRatedSeries,
+        },
+        title: 'Top rated series',
     },
 ]
 
 const TopicsList = () => {
     return (
-        <FlatList
-            data={topics}
-            contentContainerClassName="pb-8 gap-12"
-            numColumns={1}
-            keyExtractor={(item) => item.key}
-            renderItem={({ item }) => (
-                <TMDBTopic topic_title={item.title}>
-                    <TMDBList queryKey={[item.key]} queryFn={item.queryFn} />
-                </TMDBTopic>
-            )}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-        />
+        <View className="flex-1">
+            <FlatList
+                data={topics}
+                contentContainerClassName="pb-8 gap-12"
+                numColumns={1}
+                scrollEnabled={false}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <TMDBTopic topic_title={item.title}>
+                        <TMDBList query={item.query} />
+                    </TMDBTopic>
+                )}
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+            />
+        </View>
     )
 }
 

@@ -96,18 +96,20 @@ export type SeriesDetails = {
 export type DiscoverSeriesParams = {
     language?: string
     sort_by?: SeriesSortBy
-    air_date_gte?: string
-    air_date_lte?: string
-    first_air_date_gte?: string
-    first_air_date_lte?: string
+    'air_date.gte'?: string
+    'air_date.lte'?: string
+    'first_air_date.gte'?: string
+    'first_air_date.lte'?: string
     first_air_date_year?: number
     page?: number
     timezone?: string
-    vote_average_gte?: number
-    vote_average_lte?: number
-    vote_count_gte?: number
-    vote_count_lte?: number
+    'vote_average.gte'?: number
+    'vote_average.lte'?: number
+    'vote_count.gte'?: number
+    'vote_count.lte'?: number
     with_genres?: string
+    'with_runtime.lte'?: number
+    'with_runtime.gte'?: number
     with_original_language?: string
     with_watch_providers?: string
     watch_region?: string
@@ -116,10 +118,11 @@ export type DiscoverSeriesParams = {
     include_adult?: boolean
     with_keywords?: string
     without_keywords?: string
+    without_genres?: string
     screened_theatrically?: boolean
     with_companies?: string
     without_companies?: string
-    with_status?: 'Returning Series' | 'Ended' | 'Canceled'
+    with_status?: string
 }
 
 export type SeriesSortBy =
